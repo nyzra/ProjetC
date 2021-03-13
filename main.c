@@ -23,6 +23,7 @@ void GetAllLines( char** Lines)
     fclose(file);
     
 }
+
 void CheckSpecific()
 {
     int i=0;
