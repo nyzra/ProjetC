@@ -1,40 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "constantes.h"
-void GetAllLines( char** Lines)
+
+void GetAllLines( char Lines[][NBCHAR])
 {
-    FILE* file= NULL;
+    FILE *file= NULL;
     int line;
-    int i=0;
-    file= fopen("parking.txt","r");
+    file= fopen("parking","r");
     if(file==NULL)
     {
         printf("File could not be open\n");
         return;
     }
-    do
-    {
- 
-        fgets(Lines[i],31,file); //erreur a cette ligne
 
-        printf(" la ligne %d est %s\n",i,Lines[i]);
-        i++;
-    } while (*(Lines[i-1]) != EOF);
+    for (int i = 0; i < NBLINES-1; i++)
+    {
+        fgets(Lines[i],31,file);
+
+        printf(" la ligne %d est %s\n",i+1,Lines[i]);
+    }
     fclose(file);
     
 }
 
 void CheckSpecific()
 {
-    int i=0;
-    char Lines[101][31];
+    char Lines[NBLINES][NBCHAR];
     GetAllLines(Lines);
 
-    while (*(Lines[i]) != EOF)
+    for (int i = 0; i < NBLINES-1; i++)
     {
         printf("%s\n",Lines[i]);
-        i++;
     }
+
     
 }
 
@@ -63,7 +61,7 @@ int main()
 
     do
     {
-        printf("Choose one of the following options by entering 1,2,3 or 4 \n1- Check the availability of a specific car slot \n2- Display all available car slots \n3- Display the numbers of available car slots4- Make a reservation \n5- Quit\n");
+        printf("Choose one of the following options by entering 1,2,3 or 4 \n1- Check the availability of a specific car slot \n2- Display all available car slots \n3- Display the numbers of available car slots\n4- Make a reservation \n5- Quit\n");
         scanf("%d",&request);
 
         switch (request)
