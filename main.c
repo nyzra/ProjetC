@@ -16,45 +16,40 @@ void GetAllLines( char Lines[][NBCHAR])
     for (int i = 0; i < NBLINES-1; i++)
     {
         fgets(Lines[i],31,file);
-
-        printf(" la ligne %d est %s\n",i+1,Lines[i]);
     }
     fclose(file);
     
 }
 
-void CheckSpecific()
+void CheckSpecific(char Lines[][NBCHAR])
 {
-    char Lines[NBLINES][NBCHAR];
-    GetAllLines(Lines);
-
-    for (int i = 0; i < NBLINES-1; i++)
-    {
-        printf("%s\n",Lines[i]);
-    }
-
     
 }
 
-void AllAvailableCar()
+void AllAvailableCar(char Lines[][NBCHAR])
 {
 
 }
 
-void AvaialbleSlot()
+void AvaialbleSlot(char Lines[][NBCHAR])
 {
 
 
 }
 
-void Reservation()
+void Reservation(char Lines[][NBCHAR])
 {
 
 }
 
+void Save(char Lines[][NBCHAR])
+{
+
+}
 
 int main()
 {
+    char Lines[NBLINES][NBCHAR];
     int request , open=1;
 
     printf("Hello and welcome to the smart parking reservation system!\n");
@@ -63,20 +58,21 @@ int main()
     {
         printf("Choose one of the following options by entering 1,2,3 or 4 \n1- Check the availability of a specific car slot \n2- Display all available car slots \n3- Display the numbers of available car slots\n4- Make a reservation \n5- Quit\n");
         scanf("%d",&request);
+        GetAllLines(Lines);
 
         switch (request)
         {
         case CHECKSPECIFIC:
-            CheckSpecific();
+            CheckSpecific(Lines);
             break;
         case ALLAVAILABLECAR:
-            AllAvailableCar();
+            AllAvailableCar(Lines);
             break;
         case AVAILABLESLOT:
-            AvaialbleSlot();
+            AvaialbleSlot(Lines);
             break;
         case RESERVATION:
-            Reservation();
+            Reservation(Lines);
             break;
         case QUIT:
             open=0;
@@ -85,6 +81,7 @@ int main()
                 printf("I did not understand what you want\n");
 
             break;
+        Save(Lines);
         }
     }
     while(open);
