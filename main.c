@@ -28,7 +28,7 @@ int isPlaceFree(char Lines[][NBCHAR],int line)
     int j=0,place;
 
     //reach the place in the array where the number is
-    while ( Lines[line][j+1]!= '\n')
+    while ( Lines[line][j+1]!= '\n' && Lines[line][j+1]!= EOF)
         {
             j++;
 
@@ -67,7 +67,15 @@ void CheckSpecific(char Lines[][NBCHAR])
 
 void AllAvailableCar(char Lines[][NBCHAR])
 {
-
+    printf("The available car slot are the numbers:\n");
+    for (int i = 0; i < NBLINES; i++)
+    {
+        if (isPlaceFree(Lines,i))
+        {
+            printf("%d ",i+1);
+        }
+    }
+    printf("\n");
 }
 
 void AvaialbleSlot(char Lines[][NBCHAR])
