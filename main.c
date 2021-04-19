@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "constantes.h"
-
+#include <string.h>
 void GetAllLines( char Lines[][NBCHAR])
 {
     FILE *file= NULL;
@@ -13,7 +13,7 @@ void GetAllLines( char Lines[][NBCHAR])
         return;
     }
 
-    for (int i = 0; i < NBLINES-1; i++)
+    for (int i = 0; i < NBLINES; i++)
     {
         fgets(Lines[i],31,file);
     }
@@ -21,8 +21,47 @@ void GetAllLines( char Lines[][NBCHAR])
     
 }
 
+int isPlaceFree(char Lines[][NBCHAR],int line)
+{
+    //check in the array in a specific line if it is free or not
+
+    int j=0,place;
+
+    //reach the place in the array where the number is
+    while ( Lines[line][j+1]!= '\n')
+        {
+            j++;
+
+        } 
+
+        place=atoi(&(Lines[line][j]));
+        if (place==0)
+        {
+            return 1;
+        }
+        return 0;
+}
+
+
 void CheckSpecific(char Lines[][NBCHAR])
 {
+    int line;
+    printf("Which car slot would like like to check?\n");
+    printf("hasi\n");
+    scanf("%d",&line);
+    printf("non2\n");
+    if (line>100 || line<1)
+    {
+        printf("plz enter a number betwenn 1 and 100\n");
+        CheckSpecific(Lines);
+        return;
+    }
+    printf("oui\n");
+    if (isPlaceFree(Lines,line-1))
+    {
+        printf("the place number %d is free\n",line);
+    }
+    printf("the place number %d is not free\n",line);
     
 }
 
@@ -46,6 +85,7 @@ void Save(char Lines[][NBCHAR])
 {
 
 }
+
 
 int main()
 {
