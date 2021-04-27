@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "constantes.h"
 #include <string.h>
+
+
 void GetAllLines( char Lines[][NBCHAR])
 {
     FILE *file= NULL;
