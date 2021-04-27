@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "constantes.h"
 #include <string.h>
+
+
 void GetAllLines( char Lines[][NBCHAR])
 {
     FILE *file= NULL;
@@ -80,18 +82,62 @@ void AllAvailableCar(char Lines[][NBCHAR])
 
 void AvaialbleSlot(char Lines[][NBCHAR])
 {
-
-
+    int counter=0;
+    for (int i = 0; i < NBLINES; i++)
+    {
+        if (isPlaceFree(Lines,i))
+        {
+            counter++;
+        }
+    }
+    printf("There is %d places free\n",counter);
 }
 
 void Reservation(char Lines[][NBCHAR])
 {
+    int reservation, j=0;
+    char confirmation[4]="yes";
 
+    printf("Wich place would you like to reserve?\n");
+    scanf("%d",&reservation);
+    if (!isPlaceFree(Lines,reservation-1))
+        {
+            printf("This place is not free\n");
+            AllAvailableCar(Lines);
+            Reservation(Lines);
+            return;
+        }
+    printf("Do you confirm you want the %d place [YeS/no]\n",reservation);
+    scanf("%s",&confirmation);
+
+    if(confirmation=="no")
+    {
+        return;
+    }
+    //reach the place in the array where the number is
+    while ( Lines[reservation-1][j+1]!= '\n' && Lines[reservation-1][j+1]!= EOF)
+        {
+            j++;
+        } 
+    printf("%c\n",Lines[reservation-1][j]);
+    Lines[reservation-1][j]='1';
+    printf("%c\n",Lines[reservation-1][j]);
 }
 
 void Save(char Lines[][NBCHAR])
 {
-
+    FILE* file=fopen("parking","w");
+    if (file==NULL)
+    {
+        printf("The file could not be open \n");
+        return;
+    }
+    printf("in save \n");
+    for (int i = 0; i < NBLINES; i++)
+    {
+        fputs(Lines[i],file);
+    }
+    
 }
 
 
@@ -129,8 +175,9 @@ int main()
                 printf("I did not understand what you want\n");
 
             break;
-        Save(Lines);
+        
         }
+        Save(Lines);
     }
     while(open);
 }
